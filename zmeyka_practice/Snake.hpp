@@ -37,7 +37,6 @@ namespace Actor {
 			sf::Vector2f m_Position;
 		};
 
-		int m_Speed;
 		std::vector <Snake::Snake_chain> Snake_Chains;
 
 		void construct_SC();

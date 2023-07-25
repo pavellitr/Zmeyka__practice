@@ -24,7 +24,7 @@ sf::Vector2f Actor::Snake::Snake_chain::getPosition() {
 ////////////////////////////////////////////////////////////////////////////////////
 
 Actor::Snake::Snake() {
-	m_Speed = 40;
+
 
 	construct_SC();
 
