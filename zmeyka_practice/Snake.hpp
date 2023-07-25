@@ -9,6 +9,34 @@
 
 namespace Actor {
 	class Snake {
+	private:
+		class Snake_chain {
+		private:
+			sf::Texture* m_Texture;
+			sf::Sprite m_Sprite;
+			sf::Vector2f m_Position;
+
+		public:
+			Snake_chain(sf::Texture texture, sf::Vector2f position);
+
+			void setPosition(sf::Vector2f pos);
+			sf::Vector2f getPosition();
+
+			sf::Sprite getSprite();
+		};
+
+		std::vector <Snake::Snake_chain> Snake_Chains;
+
+		void construct_SC();
+		void roll_massive(sf::Vector2f new_pos);
+
+
+
+		bool m_goRight;
+		bool m_goUp;
+		bool m_goDown;
+		bool m_goLeft;
+
 	public:
 		Snake();
 
@@ -20,33 +48,6 @@ namespace Actor {
 		std::vector <sf::Sprite> getSprite();
 
 		void update();
-
-	private:
-		class Snake_chain {
-		public:
-			Snake_chain(sf::Texture texture, sf::Vector2f position);
-
-			void setPosition(sf::Vector2f pos);
-			sf::Vector2f getPosition();
-
-			sf::Sprite getSprite();
-
-		private:
-			sf::Texture m_Texture;
-			sf::Sprite m_Sprite;
-			sf::Vector2f m_Position;
-		};
-
-		std::vector <Snake::Snake_chain> Snake_Chains;
-
-		void construct_SC();
-		void roll_massive(sf::Vector2f new_pos);
-
-
-		bool m_goLeft;
-		bool m_goRight;
-		bool m_goUp;
-		bool m_goDown;
 
 	};
 }
