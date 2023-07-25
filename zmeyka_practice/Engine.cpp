@@ -38,8 +38,7 @@ void Engine_mod::Engine::draw() {
 
 	m_Window.draw(m_BackgroundSprite);
 
-	std::vector<sf::Sprite> Buffer = snake.getSprite();
-
+	std::vector <sf::Sprite> Buffer = snake.getSprite();
 	for (int x = 0; x < Buffer.size(); x++) {
 		m_Window.draw(Buffer[x]);
 	}

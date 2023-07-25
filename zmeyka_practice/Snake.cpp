@@ -1,8 +1,9 @@
 #include "Snake.hpp"
 
 Actor::Snake::Snake_chain::Snake_chain(sf::Texture texture, sf::Vector2f position) {
-	m_Texture = texture;
-	m_Sprite.setTexture(m_Texture);
+	m_Texture = new sf::Texture;
+	*m_Texture = texture;
+	m_Sprite.setTexture(*m_Texture);
 
 	m_Position = position;
 	m_Sprite.setPosition(m_Position);
