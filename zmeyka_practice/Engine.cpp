@@ -16,6 +16,13 @@ void Engine_mod::Engine::start() {
 	sf::Clock clockUpdate;
 	while (m_Window.isOpen()) {
 
+		sf::Event event;
+		while (m_Window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				m_Window.close();
+		}
+
 		input();
 
 		sf::Int32 dU = clockUpdate.getElapsedTime().asMilliseconds();
@@ -53,7 +60,6 @@ void Engine_mod::Engine::input() {
 	{
 		m_Window.close();
 	}
-
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		snake.is_Left();
