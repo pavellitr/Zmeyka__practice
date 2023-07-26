@@ -48,6 +48,8 @@ namespace Actor {
 		std::vector <sf::Sprite> getSprite();
 		sf::Vector2f getHeadPosition();
 
+		void grow_Snake();
+		void grow();
 		void update();
 
 	};
