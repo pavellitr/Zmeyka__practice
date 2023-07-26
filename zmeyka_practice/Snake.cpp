@@ -13,6 +13,7 @@ sf::Sprite Actor::Snake::Snake_chain::getSprite() {
 	return m_Sprite;
 }
 
+
 void Actor::Snake::Snake_chain::setPosition(sf::Vector2f pos) {
 	m_Position = pos;
 	m_Sprite.setPosition(m_Position);
@@ -35,6 +36,10 @@ Actor::Snake::Snake() {
 	m_goRight = false;
 }
 
+sf::Vector2f Actor::Snake::getHeadPosition() {
+	return Snake_Chains[0].getPosition();
+}
+
 std::vector <sf::Sprite> Actor::Snake::getSprite() {
 	std::vector <sf::Sprite> returnable;
 	for (int x = 0; x < Snake_Chains.size(); x++) {
@@ -44,9 +49,6 @@ std::vector <sf::Sprite> Actor::Snake::getSprite() {
 	return returnable;
 }
 
-sf::Vector2f Actor::Snake::getHeadPosition() {
-	return Snake_Chains[0].getPosition();
-}
 
 void Actor::Snake::construct_SC() {
 	sf::Texture texture;
