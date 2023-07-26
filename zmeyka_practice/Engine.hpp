@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Snake.hpp"
+#include "Apple.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
@@ -19,6 +20,8 @@ namespace Engine_mod {
 		sf::Texture m_BackgroundTexture;
 
 		Actor::Snake snake;
+		Actor::Apple apple;
+		
 
 		void input();
 		void update();
