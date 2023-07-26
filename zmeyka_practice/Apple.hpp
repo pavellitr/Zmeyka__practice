@@ -1,7 +1,9 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#define START_X 500
-#define START_Y 500
+#include "Snake.hpp"
+
+//#define START_X 500
+//#define START_Y 500
 namespace Actor {
 	class Apple {
 	private:
