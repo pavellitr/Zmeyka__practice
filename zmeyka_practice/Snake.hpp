@@ -39,7 +39,7 @@ namespace Actor {
 
 	public:
 		Snake();
-
+		void grows_Snake();
 		void is_Left();
 		void is_Down();
 		void is_Right();
