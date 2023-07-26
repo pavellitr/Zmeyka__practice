@@ -13,7 +13,7 @@ Engine_mod::Engine::Engine() {
 }
 
 void Engine_mod::Engine::start() {
-	sf::Clock clockUpdate, clockFPS;
+	sf::Clock clockUpdate;
 	while (m_Window.isOpen()) {
 
 		input();

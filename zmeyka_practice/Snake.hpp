@@ -31,7 +31,6 @@ namespace Actor {
 		void roll_massive(sf::Vector2f new_pos);
 
 
-
 		bool m_goRight;
 		bool m_goUp;
 		bool m_goDown;
@@ -46,6 +45,7 @@ namespace Actor {
 		void is_Up();
 
 		std::vector <sf::Sprite> getSprite();
+		sf::Vector2f getHeadPosition();
 
 		void update();
 

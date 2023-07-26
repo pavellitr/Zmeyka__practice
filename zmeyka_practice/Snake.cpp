@@ -44,6 +44,9 @@ std::vector <sf::Sprite> Actor::Snake::getSprite() {
 	return returnable;
 }
 
+sf::Vector2f Actor::Snake::getHeadPosition() {
+	return Snake_Chains[0].getPosition();
+}
 
 void Actor::Snake::construct_SC() {
 	sf::Texture texture;
