@@ -21,7 +21,7 @@ namespace Actor {
 
 			void setPosition(sf::Vector2f pos);
 			sf::Vector2f getPosition();
-
+			
 			sf::Sprite getSprite();
 		};
 
@@ -46,6 +46,7 @@ namespace Actor {
 		void is_Up();
 
 		std::vector <sf::Sprite> getSprite();
+		sf::Vector2f getHeadPosition();
 
 		void update();
 
