@@ -50,6 +50,7 @@ namespace Actor {
 
 		void grow_Snake();
 		void grow();
+		void grow();
 		void update();
 
 	};
