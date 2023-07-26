@@ -48,6 +48,7 @@ namespace Actor {
 		std::vector <sf::Sprite> getSprite();
 		sf::Vector2f getHeadPosition();
 
+		void abaoan();
 		void update();
 
 	};
