@@ -119,3 +119,7 @@ void Actor::Snake::update() {
 	}
 
 }
+
+void Actor::Snake::grows_Snake() {
+	
+}

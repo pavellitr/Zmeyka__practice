@@ -30,7 +30,7 @@ namespace Actor {
 
 		void construct_SC();
 		void roll_massive(sf::Vector2f new_pos);
-
+		void grows_Snake();
 
 
 		bool m_goRight;
