@@ -27,8 +27,10 @@ namespace Actor {
 
 		std::vector <Snake::Snake_chain> Snake_Chains;
 
+
 		void construct_SC();
 		void roll_massive(sf::Vector2f new_pos);
+
 
 
 		bool m_goRight;

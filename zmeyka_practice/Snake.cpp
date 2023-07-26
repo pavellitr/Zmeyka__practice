@@ -26,7 +26,7 @@ sf::Vector2f Actor::Snake::Snake_chain::getPosition() {
 
 Actor::Snake::Snake() {
 
-
+	
 	construct_SC();
 
 	m_goDown = false;
