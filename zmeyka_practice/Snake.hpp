@@ -39,7 +39,7 @@ namespace Actor {
 
 	public:
 		Snake();
-
+		void grows_Snake();
 		void is_Left();
 		void is_Down();
 		void is_Right();
@@ -48,7 +48,8 @@ namespace Actor {
 		std::vector <sf::Sprite> getSprite();
 		sf::Vector2f getHeadPosition();
 
-		void abaoan();
+	
+		void grow();
 		void update();
 
 	};
