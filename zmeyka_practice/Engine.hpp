@@ -21,6 +21,7 @@ namespace Engine_mod {
 
 		Actor::Snake snake;
 		Actor::Apple apple;
+		
 
 		void input();
 		void update();

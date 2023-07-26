@@ -1,6 +1,7 @@
 #include "Engine.hpp"
 
 
+
 Engine_mod::Engine::Engine() {
 	sf::Vector2f resolution;
 	resolution.x = sf::VideoMode::getDesktopMode().width;
@@ -31,12 +32,16 @@ void Engine_mod::Engine::start() {
 
 void Engine_mod::Engine::update() {
 	snake.update();
-}
 
+	apple.update();
+}
 void Engine_mod::Engine::draw() {
 	m_Window.clear(sf::Color::White);
 
 	m_Window.draw(m_BackgroundSprite);
+
+	sf::Sprite  Yabloko = apple.getSprite();
+	m_Window.draw(Yabloko);
 
 	std::vector <sf::Sprite> Buffer = snake.getSprite();
 	for (int x = 0; x < Buffer.size(); x++) {
