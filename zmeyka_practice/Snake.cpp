@@ -27,7 +27,7 @@ sf::Vector2f Actor::Snake::Snake_chain::getPosition() {
 
 Actor::Snake::Snake() {
 
-
+	
 	construct_SC();
 
 	m_goDown = false;
@@ -49,6 +49,9 @@ std::vector <sf::Sprite> Actor::Snake::getSprite() {
 	return returnable;
 }
 
+sf::Vector2f Actor::Snake::getHeadPosition() {
+	return Snake_Chains[0].getPosition();
+}
 
 void Actor::Snake::construct_SC() {
 	sf::Texture texture;
@@ -120,4 +123,8 @@ void Actor::Snake::update() {
 		roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x, Snake_Chains[0].getPosition().y + SHAG));
 	}
 
+}
+
+void Actor::Snake::grows_Snake() {
+	
 }

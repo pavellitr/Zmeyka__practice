@@ -27,9 +27,9 @@ namespace Actor {
 
 		std::vector <Snake::Snake_chain> Snake_Chains;
 
+
 		void construct_SC();
 		void roll_massive(sf::Vector2f new_pos);
-
 
 
 		bool m_goRight;
@@ -39,7 +39,7 @@ namespace Actor {
 
 	public:
 		Snake();
-
+		void grows_Snake();
 		void is_Left();
 		void is_Down();
 		void is_Right();
@@ -48,6 +48,8 @@ namespace Actor {
 		std::vector <sf::Sprite> getSprite();
 		sf::Vector2f getHeadPosition();
 
+	
+		void grow();
 		void update();
 
 	};
