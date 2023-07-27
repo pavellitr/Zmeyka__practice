@@ -8,6 +8,8 @@ Engine_mod::Engine::Engine() {
 	resolution.y = sf::VideoMode::getDesktopMode().height;
 
 	m_Window.create(sf::VideoMode(1000, 1000), "Snake Game");
+
+
 	snake = new Actor::Snake();
 
 	this->m_BackgroundTexture.loadFromFile("Image\\myWorld.png");
