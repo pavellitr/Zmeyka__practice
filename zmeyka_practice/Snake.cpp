@@ -64,34 +64,38 @@ void Actor::Snake::construct_SC() {
 }
 
 void Actor::Snake::is_Left() {
-	if (!m_goRight) {
+	if (!m_goRight && !is_Changed) {
 		m_goLeft = true;
 		m_goDown = false;
 		m_goUp = false;
+		is_Changed = true;
 	}
 }
 
 void Actor::Snake::is_Down() {
-	if (!m_goUp) {
+	if (!m_goUp && !is_Changed) {
 		m_goDown = true;
 		m_goLeft = false;
 		m_goRight = false;
+		is_Changed = true;
 	}
 }
 
 void Actor::Snake::is_Right() {
-	if (!m_goLeft) {
+	if (!m_goLeft && !is_Changed) {
 		m_goRight = true;
 		m_goDown = false;
 		m_goUp = false;
+		is_Changed = true;
 	}
 }
 
 void Actor::Snake::is_Up() {
-	if (!m_goDown) {
+	if (!m_goDown && !is_Changed) {
 		m_goUp = true;
 		m_goLeft = false;
 		m_goRight = false;
+		is_Changed = true;
 
 	}
 }
@@ -120,10 +124,11 @@ void Actor::Snake::update() {
 	if (!eated) {
 		if (m_goLeft) {
 			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x - SHAG, Snake_Chains[0].getPosition().y));
+			grows_Snake();
 		}
 		if (m_goRight) {
 			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x + SHAG, Snake_Chains[0].getPosition().y));
-
+			
 		}
 		if (m_goUp) {
 			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x, Snake_Chains[0].getPosition().y - SHAG));
@@ -151,6 +156,7 @@ void Actor::Snake::update() {
 		}
 		eated = false;
 	}
+	is_Changed = false;
 }
 
 void Actor::Snake::grows_Snake() {

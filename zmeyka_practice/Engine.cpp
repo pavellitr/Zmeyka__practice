@@ -8,8 +8,9 @@ Engine_mod::Engine::Engine() {
 	resolution.y = sf::VideoMode::getDesktopMode().height;
 
 	m_Window.create(sf::VideoMode(1000, 1000), "Snake Game");
+	snake = new Actor::Snake();
 
-	this->m_BackgroundTexture.loadFromFile("Image\\Background.jpg");
+	this->m_BackgroundTexture.loadFromFile("Image\\myWorld.png");
 	this->m_BackgroundSprite.setTexture(m_BackgroundTexture);
 }
 
@@ -39,7 +40,9 @@ void Engine_mod::Engine::start() {
 }
 
 void Engine_mod::Engine::update() {
-	snake.update();
+
+	snake->update();
+
 	apple.update();
 }
 void Engine_mod::Engine::draw() {
@@ -50,7 +53,7 @@ void Engine_mod::Engine::draw() {
 	sf::Sprite  Yabloko = apple.getSprite();
 	m_Window.draw(Yabloko);
 
-	std::vector <sf::Sprite> Buffer = snake.getSprite();
+	std::vector <sf::Sprite> Buffer = snake->getSprite();
 	for (int x = 0; x < Buffer.size(); x++) {
 		m_Window.draw(Buffer[x]);
 	}
@@ -67,19 +70,19 @@ void Engine_mod::Engine::input() {
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		snake.is_Left();
+		snake->is_Left();
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		snake.is_Right();
+		snake->is_Right();
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		snake.is_Up();
+		snake->is_Up();
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		snake.is_Down();
+		snake->is_Down();
 	}
 
 

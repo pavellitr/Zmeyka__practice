@@ -3,8 +3,8 @@
 #include "SFML/Graphics.hpp"
 #include <vector>
 
-#define START_X 300
-#define START_Y 300
+#define START_X 320
+#define START_Y 320
 #define SHAG 40
 
 namespace Actor {
@@ -37,6 +37,7 @@ namespace Actor {
 		bool m_goDown;
 		bool m_goLeft;
 		bool eated;
+		bool is_Changed;
 
 	public:
 		Snake();

@@ -19,7 +19,7 @@ namespace Engine_mod {
 		sf::Sprite m_BackgroundSprite;
 		sf::Texture m_BackgroundTexture;
 
-		Actor::Snake snake;
+		Actor::Snake* snake;
 		Actor::Apple apple;
 		
 
