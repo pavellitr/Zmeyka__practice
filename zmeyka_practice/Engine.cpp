@@ -40,7 +40,6 @@ void Engine_mod::Engine::start() {
 
 void Engine_mod::Engine::update() {
 	snake.update();
-
 	apple.update();
 }
 void Engine_mod::Engine::draw() {
