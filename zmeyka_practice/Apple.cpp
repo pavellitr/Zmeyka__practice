@@ -10,7 +10,7 @@ Actor::Apple::Apple() {
 	eaten = 0;
 
 	
-	a_Sprite.setPosition(sf::Vector2f(300,180));
+	a_Sprite.setPosition(sf::Vector2f(280,160));
  
 
 }
