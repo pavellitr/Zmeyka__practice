@@ -49,9 +49,6 @@ std::vector <sf::Sprite> Actor::Snake::getSprite() {
 	return returnable;
 }
 
-sf::Vector2f Actor::Snake::getHeadPosition() {
-	return Snake_Chains[0].getPosition();
-}
 
 void Actor::Snake::construct_SC() {
 	sf::Texture texture;
@@ -106,25 +103,57 @@ void Actor::Snake::roll_massive(sf::Vector2f new_pos) {
 	Snake_Chains[0].setPosition(new_pos);
 }
 
+void Actor::Snake::grow(sf::Vector2f new_pos) {
+	sf::Texture texture;
+	texture.loadFromFile("Image\\Snake_body.png");
+	sf::Vector2f position = Snake_Chains[Snake_Chains.size() - 2].getPosition();
+	Snake_chain Snake_body(texture, position);
+	Snake_Chains.push_back(Snake_Chains[Snake_Chains.size() - 1]);
+	Snake_Chains[Snake_Chains.size() - 2] = Snake_body;
+	for (int x = Snake_Chains.size() - 3; x > 0; x--) {
+		Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
+	}
+	Snake_Chains[0].setPosition(new_pos);
+}
+
 void Actor::Snake::update() {
-	if (m_goLeft) {
-		roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x - SHAG, Snake_Chains[0].getPosition().y));
+	if (!eated) {
+		if (m_goLeft) {
+			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x - SHAG, Snake_Chains[0].getPosition().y));
+		}
+		if (m_goRight) {
+			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x + SHAG, Snake_Chains[0].getPosition().y));
 
-	}
-	if (m_goRight) {
-		roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x + SHAG, Snake_Chains[0].getPosition().y));
+		}
+		if (m_goUp) {
+			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x, Snake_Chains[0].getPosition().y - SHAG));
 
+		}
+		if (m_goDown) {
+			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x, Snake_Chains[0].getPosition().y + SHAG));
+		}
 	}
-	if (m_goUp) {
-		roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x, Snake_Chains[0].getPosition().y - SHAG));
+	else {
+		if (m_goLeft) {
+			grow(sf::Vector2f(Snake_Chains[0].getPosition().x - SHAG, Snake_Chains[0].getPosition().y));
 
-	}
-	if (m_goDown) {
-		roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x, Snake_Chains[0].getPosition().y + SHAG));
-	}
+		}
+		if (m_goRight) {
+			grow(sf::Vector2f(Snake_Chains[0].getPosition().x + SHAG, Snake_Chains[0].getPosition().y));
 
+		}
+		if (m_goUp) {
+			grow(sf::Vector2f(Snake_Chains[0].getPosition().x, Snake_Chains[0].getPosition().y - SHAG));
+
+		}
+		if (m_goDown) {
+			grow(sf::Vector2f(Snake_Chains[0].getPosition().x, Snake_Chains[0].getPosition().y + SHAG));
+		}
+		eated = false;
+	}
 }
 
 void Actor::Snake::grows_Snake() {
-	
+	eated = true;
 }
+

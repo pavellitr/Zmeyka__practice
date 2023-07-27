@@ -30,15 +30,17 @@ namespace Actor {
 
 		void construct_SC();
 		void roll_massive(sf::Vector2f new_pos);
-
+		void grow(sf::Vector2f new_pos);
 
 		bool m_goRight;
 		bool m_goUp;
 		bool m_goDown;
 		bool m_goLeft;
+		bool eated;
 
 	public:
 		Snake();
+
 		void grows_Snake();
 		void is_Left();
 		void is_Down();
@@ -48,8 +50,6 @@ namespace Actor {
 		std::vector <sf::Sprite> getSprite();
 		sf::Vector2f getHeadPosition();
 
-	
-		void grow();
 		void update();
 
 	};
