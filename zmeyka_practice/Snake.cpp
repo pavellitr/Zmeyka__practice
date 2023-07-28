@@ -138,6 +138,8 @@ void Actor::Snake::update() {
 	if (!eated) {
 		if (m_goLeft) {
 			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x - SHAG, Snake_Chains[0].getPosition().y));		
+
+
 		}
 		if (m_goRight) {
 			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x + SHAG, Snake_Chains[0].getPosition().y));
