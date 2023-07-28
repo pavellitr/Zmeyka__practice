@@ -2,6 +2,7 @@
 
 #include "SFML/Graphics.hpp"
 #include <vector>
+#include <iostream>
 
 #define START_X 320
 #define START_Y 320
@@ -26,7 +27,7 @@ namespace Actor {
 		};
 
 		std::vector <Snake::Snake_chain> Snake_Chains;
-
+		std::vector <sf::Vector2f> Snake_Pos;
 
 		void construct_SC();
 		void roll_massive(sf::Vector2f new_pos);
@@ -48,6 +49,7 @@ namespace Actor {
 		void is_Right();
 		void is_Up();
 
+		std::vector <sf::Vector2f> getPos();
 		std::vector <sf::Sprite> getSprite();
 		sf::Vector2f getHeadPosition();
 
