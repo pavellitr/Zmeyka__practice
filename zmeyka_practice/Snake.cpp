@@ -49,6 +49,10 @@ std::vector <sf::Sprite> Actor::Snake::getSprite() {
 	return returnable;
 }
 
+std::vector <sf::Vector2f> Actor::Snake::getPos() {
+	return Snake_Pos;
+}
+
 
 void Actor::Snake::construct_SC() {
 	sf::Texture texture;
@@ -61,7 +65,11 @@ void Actor::Snake::construct_SC() {
 	Snake_Chains.push_back(Snake_head);
 	Snake_Chains.push_back(Snake_body);
 	Snake_Chains.push_back(Snake_tail);
+	Snake_Pos.push_back(Snake_head.getPosition());
+	Snake_Pos.push_back(Snake_body.getPosition());
+	Snake_Pos.push_back(Snake_tail.getPosition());
 }
+
 
 void Actor::Snake::is_Left() {
 	if (!m_goRight && !is_Changed) {
@@ -103,8 +111,10 @@ void Actor::Snake::is_Up() {
 void Actor::Snake::roll_massive(sf::Vector2f new_pos) {
 	for (int x = Snake_Chains.size() - 1; x > 0; x--) {
 		Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
+		Snake_Pos[x] = Snake_Pos[x - 1];
 	}
 	Snake_Chains[0].setPosition(new_pos);
+	Snake_Pos[0] = new_pos;
 }
 
 void Actor::Snake::grow(sf::Vector2f new_pos) {
@@ -113,22 +123,24 @@ void Actor::Snake::grow(sf::Vector2f new_pos) {
 	sf::Vector2f position = Snake_Chains[Snake_Chains.size() - 2].getPosition();
 	Snake_chain Snake_body(texture, position);
 	Snake_Chains.push_back(Snake_Chains[Snake_Chains.size() - 1]);
+	Snake_Pos.push_back(Snake_Pos[Snake_Pos.size() - 1]);
 	Snake_Chains[Snake_Chains.size() - 2] = Snake_body;
+	Snake_Pos[Snake_Pos.size() - 2] = position;
 	for (int x = Snake_Chains.size() - 3; x > 0; x--) {
 		Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
+		Snake_Pos[x] = Snake_Pos[x - 1];
 	}
 	Snake_Chains[0].setPosition(new_pos);
+	Snake_Pos[0] = new_pos;
 }
 
 void Actor::Snake::update() {
 	if (!eated) {
 		if (m_goLeft) {
-			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x - SHAG, Snake_Chains[0].getPosition().y));
-			grows_Snake();
+			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x - SHAG, Snake_Chains[0].getPosition().y));		
 		}
 		if (m_goRight) {
 			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x + SHAG, Snake_Chains[0].getPosition().y));
-			
 		}
 		if (m_goUp) {
 			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x, Snake_Chains[0].getPosition().y - SHAG));
