@@ -33,13 +33,16 @@ void Engine_mod::Engine::start() {
 
 			sf::Int32 dU = clockUpdate.getElapsedTime().asMilliseconds();
 
-			if (dU >= 100) {
+			if (dU >= 300) {
 				update();
 				clockUpdate.restart();
 			}
 
 			draw();
-			if (snake->getSize() == 5) {
+			if (snake->getSize() == 10) {
+				is_Win = 1;
+			}
+			else if (snake->getDead()) {
 				is_Win = -1;
 			}
 		}

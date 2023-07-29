@@ -34,6 +34,8 @@ Actor::Snake::Snake() {
 	m_goUp = true;
 	m_goLeft = false;
 	m_goRight = false;
+
+	is_Dead = false;
 }
 
 sf::Vector2f Actor::Snake::getHeadPosition() {
@@ -109,60 +111,81 @@ void Actor::Snake::is_Up() {
 }
 
 void Actor::Snake::roll_massive(sf::Vector2f new_pos) {
-	for (int x = Snake_Chains.size() - 1; x > 0; x--) {
-		Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
-		Snake_Pos[x] = Snake_Pos[x - 1];
+	for (int x = 0; x < Snake_Pos.size() - 1; x++) {
+		if (new_pos == Snake_Pos[x]) {
+			is_Dead = true;
+			x = Snake_Pos.size() - 2;
+		}
 	}
+	if (!is_Dead) {
 
-	if (new_pos.x > 1000) {
-		new_pos.x -= 1000;
+		for (int x = Snake_Chains.size() - 1; x > 0; x--) {
+			Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
+			Snake_Pos[x] = Snake_Pos[x - 1];
+		}
+
+		if (new_pos.x > 960) {
+			new_pos.x -= 1000;
+		}
+		if (new_pos.y > 960) {
+			new_pos.y -= 1000;
+		}
+		if (new_pos.x < 0) {
+			new_pos.x += 1000;
+		}
+		if (new_pos.y < 0) {
+			new_pos.y += 1000;
+		}
+		Snake_Chains[0].setPosition(new_pos);
+		Snake_Pos[0] = new_pos;
 	}
-	if (new_pos.y > 1000) {
-		new_pos.y -= 1000;
-	}
-	if (new_pos.x < 0) {
-		new_pos.x += 1000;
-	}
-	if (new_pos.y < 0) {
-		new_pos.y += 1000;
-	}
-	Snake_Chains[0].setPosition(new_pos);
-	Snake_Pos[0] = new_pos;
 }
 
 void Actor::Snake::grow(sf::Vector2f new_pos) {
-	sf::Texture texture;
-	texture.loadFromFile("Image\\Snake_body.png");
-	sf::Vector2f position = Snake_Chains[Snake_Chains.size() - 2].getPosition();
-	Snake_chain Snake_body(texture, position);
-	Snake_Chains.push_back(Snake_Chains[Snake_Chains.size() - 1]);
-	Snake_Pos.push_back(Snake_Pos[Snake_Pos.size() - 1]);
-	Snake_Chains[Snake_Chains.size() - 2] = Snake_body;
-	Snake_Pos[Snake_Pos.size() - 2] = position;
-	for (int x = Snake_Chains.size() - 3; x > 0; x--) {
-		Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
-		Snake_Pos[x] = Snake_Pos[x - 1];
+	for (int x = 0; x < Snake_Pos.size(); x++) {
+		if (new_pos == Snake_Pos[x]) {
+			is_Dead = true;
+			x = Snake_Pos.size() - 1;
+		}
 	}
+	if (!is_Dead) {
+		sf::Texture texture;
+		texture.loadFromFile("Image\\Snake_body.png");
 
-	if (new_pos.x > 1000) {
-		new_pos.x -= 1000;
-	}
-	if (new_pos.y > 1000) {
-		new_pos.y -= 1000;
-	}
-	if (new_pos.x < 0) {
-		new_pos.x += 1000;
-	}
-	if (new_pos.y < 0) {
-		new_pos.y += 1000;
-	}
+		sf::Vector2f position = Snake_Chains[Snake_Chains.size() - 2].getPosition();
+		Snake_chain Snake_body(texture, position);
 
-	Snake_Chains[0].setPosition(new_pos);
-	Snake_Pos[0] = new_pos;
+		Snake_Chains.push_back(Snake_Chains[Snake_Chains.size() - 1]);
+		Snake_Pos.push_back(Snake_Pos[Snake_Pos.size() - 1]);
+
+		Snake_Chains[Snake_Chains.size() - 2] = Snake_body;
+		Snake_Pos[Snake_Pos.size() - 2] = position;
+
+		for (int x = Snake_Chains.size() - 3; x > 0; x--) {
+			Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
+			Snake_Pos[x] = Snake_Pos[x - 1];
+		}
+
+		if (new_pos.x > 960) {
+			new_pos.x -= 1000;
+		}
+		if (new_pos.y > 960) {
+			new_pos.y -= 1000;
+		}
+		if (new_pos.x < 0) {
+			new_pos.x += 1000;
+		}
+		if (new_pos.y < 0) {
+			new_pos.y += 1000;
+		}
+
+		Snake_Chains[0].setPosition(new_pos);
+		Snake_Pos[0] = new_pos;
+	}
 }
 
 void Actor::Snake::update() {
-	if (!eated) {
+	if (!eated && !is_Dead) {
 		if (m_goLeft) {
 			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x - SHAG, Snake_Chains[0].getPosition().y));		
 
@@ -178,7 +201,7 @@ void Actor::Snake::update() {
 			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x, Snake_Chains[0].getPosition().y + SHAG));
 		}
 	}
-	else {
+	else if (eated && !is_Dead) {
 		if (m_goLeft) {
 			grow(sf::Vector2f(Snake_Chains[0].getPosition().x - SHAG, Snake_Chains[0].getPosition().y));
 
@@ -205,4 +228,8 @@ void Actor::Snake::grows_Snake() {
 
 int Actor::Snake::getSize() {
 	return Snake_Chains.size();
+}
+
+bool Actor::Snake::getDead() {
+	return is_Dead;
 }
