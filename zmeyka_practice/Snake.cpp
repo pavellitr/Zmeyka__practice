@@ -1,7 +1,9 @@
 #include "Snake.hpp"
 
+//это логика Snake_chain
+
 Actor::Snake::Snake_chain::Snake_chain(sf::Texture texture, sf::Vector2f position) {
-	m_Texture = new sf::Texture;
+	m_Texture = new sf::Texture; //указатель нужен, чтобы текстурка не удалялась из памяти иначе текстурка не отображается
 	*m_Texture = texture;
 	m_Sprite.setTexture(*m_Texture);
 
@@ -25,10 +27,12 @@ sf::Vector2f Actor::Snake::Snake_chain::getPosition() {
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+//это логика Snake
+
 Actor::Snake::Snake() {
 
 	
-	construct_SC();
+	construct_SC(); //собираем змейку
 
 	m_goDown = false;
 	m_goUp = true;
@@ -42,8 +46,8 @@ sf::Vector2f Actor::Snake::getHeadPosition() {
 	return Snake_Chains[0].getPosition();
 }
 
-std::vector <sf::Sprite> Actor::Snake::getSprite() {
-	std::vector <sf::Sprite> returnable;
+std::vector <sf::Sprite> Actor::Snake::getSprite() { //собираем вектор вытаскивая спрайты из ячеек
+	std::vector <sf::Sprite> returnable; 
 	for (int x = 0; x < Snake_Chains.size(); x++) {
 		sf::Sprite a = Snake_Chains[x].getSprite();
 		returnable.push_back(a);
@@ -56,7 +60,7 @@ std::vector <sf::Vector2f> Actor::Snake::getPos() {
 }
 
 
-void Actor::Snake::construct_SC() {
+void Actor::Snake::construct_SC() { //создаем 3 ячейки загоняем их в вектор, вытаскиваем из них позиции и загоняем в другой вектор
 	sf::Texture texture;
 	texture.loadFromFile("Image\\Snake_head.png");
 	Snake_chain Snake_head(texture, sf::Vector2f(START_X, START_Y));
@@ -73,7 +77,7 @@ void Actor::Snake::construct_SC() {
 }
 
 
-void Actor::Snake::is_Left() {
+void Actor::Snake::is_Left() { //переключают состояние направления
 	if (!m_goRight && !is_Changed) {
 		m_goLeft = true;
 		m_goDown = false;
@@ -110,7 +114,7 @@ void Actor::Snake::is_Up() {
 	}
 }
 
-void Actor::Snake::roll_massive(sf::Vector2f new_pos) {
+void Actor::Snake::roll_massive(sf::Vector2f new_pos) { //новую позуцию вставляем в голову, остальные координаты сдвигаем от головы к хвосту
 	for (int x = 0; x < Snake_Pos.size() - 1; x++) {
 		if (new_pos == Snake_Pos[x]) {
 			is_Dead = true;
@@ -119,12 +123,12 @@ void Actor::Snake::roll_massive(sf::Vector2f new_pos) {
 	}
 	if (!is_Dead) {
 
-		for (int x = Snake_Chains.size() - 1; x > 0; x--) {
+		for (int x = Snake_Chains.size() - 1; x > 0; x--) { //сдвигаем позиции от головы к хвосту, старую позицию хвоста удаляем
 			Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
 			Snake_Pos[x] = Snake_Pos[x - 1];
 		}
 
-		if (new_pos.x > 960) {
+		if (new_pos.x > 960) { //телепорты от стены к стене
 			new_pos.x -= 1000;
 		}
 		if (new_pos.y > 960) {
@@ -136,13 +140,13 @@ void Actor::Snake::roll_massive(sf::Vector2f new_pos) {
 		if (new_pos.y < 0) {
 			new_pos.y += 1000;
 		}
-		Snake_Chains[0].setPosition(new_pos);
-		Snake_Pos[0] = new_pos;
+		Snake_Chains[0].setPosition(new_pos); //новую позицию в голову
+		Snake_Pos[0] = new_pos; //записываем новую позицию в вектор позиций
 	}
 }
 
-void Actor::Snake::grow(sf::Vector2f new_pos) {
-	for (int x = 0; x < Snake_Pos.size(); x++) {
+void Actor::Snake::grow(sf::Vector2f new_pos) { //то же самое только теперь змейка еще и растет 
+	for (int x = 0; x < Snake_Pos.size(); x++) { //проверка на столкновение
 		if (new_pos == Snake_Pos[x]) {
 			is_Dead = true;
 			x = Snake_Pos.size() - 1;
@@ -150,18 +154,18 @@ void Actor::Snake::grow(sf::Vector2f new_pos) {
 	}
 	if (!is_Dead) {
 		sf::Texture texture;
-		texture.loadFromFile("Image\\Snake_body.png");
+		texture.loadFromFile("Image\\Snake_body.png"); //создаем ячейку
 
 		sf::Vector2f position = Snake_Chains[Snake_Chains.size() - 2].getPosition();
 		Snake_chain Snake_body(texture, position);
 
-		Snake_Chains.push_back(Snake_Chains[Snake_Chains.size() - 1]);
-		Snake_Pos.push_back(Snake_Pos[Snake_Pos.size() - 1]);
+		Snake_Chains.push_back(Snake_Chains[Snake_Chains.size() - 1]); //загоняем новую ячейку прям перед хвостом
+		Snake_Pos.push_back(Snake_Pos[Snake_Pos.size() - 1]); 
 
 		Snake_Chains[Snake_Chains.size() - 2] = Snake_body;
 		Snake_Pos[Snake_Pos.size() - 2] = position;
 
-		for (int x = Snake_Chains.size() - 3; x > 0; x--) {
+		for (int x = Snake_Chains.size() - 3; x > 0; x--) { //сдвигаем все от головы до 3 элемента с конца, чтобы свежедобавленная ячейка и хвост остались на месте
 			Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
 			Snake_Pos[x] = Snake_Pos[x - 1];
 		}
@@ -184,7 +188,7 @@ void Actor::Snake::grow(sf::Vector2f new_pos) {
 	}
 }
 
-void Actor::Snake::update() {
+void Actor::Snake::update() { //и так поймете
 	if (!eated && !is_Dead) {
 		if (m_goLeft) {
 			roll_massive(sf::Vector2f(Snake_Chains[0].getPosition().x - SHAG, Snake_Chains[0].getPosition().y));		

@@ -9,13 +9,13 @@
 #define SHAG 40
 
 namespace Actor {
-	class Snake {
+	class Snake { //короче, змейка состоит из €чеек и кажда€ €чейка это экземпл€р класса Snake_chain (дальше буду называть €чейками)
 	private:
 		class Snake_chain {
 		private:
 			sf::Texture* m_Texture;
 			sf::Sprite m_Sprite;
-			sf::Vector2f m_Position;
+			sf::Vector2f m_Position; //позици€ €чейки змеи
 
 		public:
 			Snake_chain(sf::Texture texture, sf::Vector2f position);
@@ -26,12 +26,12 @@ namespace Actor {
 			sf::Sprite getSprite();
 		};
 
-		std::vector <Snake::Snake_chain> Snake_Chains;
-		std::vector <sf::Vector2f> Snake_Pos;
+		std::vector <Snake::Snake_chain> Snake_Chains; //вектор €чеек 
+		std::vector <sf::Vector2f> Snake_Pos; //вектор позиций €чеек
 
-		void construct_SC();
-		void roll_massive(sf::Vector2f new_pos);
-		void grow(sf::Vector2f new_pos);
+		void construct_SC(); //собирает начальную змейку из головы, тела и хвоста
+		void roll_massive(sf::Vector2f new_pos); //отвечает за перемещение змейки
+		void grow(sf::Vector2f new_pos); //то же самое но еще и растет
 
 		bool m_goRight;
 		bool m_goUp;
@@ -44,19 +44,19 @@ namespace Actor {
 	public:
 		Snake();
 
-		void grows_Snake();
-		void is_Left();
+		void grows_Snake(); //заставл€ет змейку расти
+		void is_Left(); //мен€ют направление
 		void is_Down();
 		void is_Right();
 		void is_Up();
-		bool getDead();
+		bool getDead(); //запрашивает мертва ли змейка
 
-		std::vector <sf::Vector2f> getPos();
+		std::vector <sf::Vector2f> getPos(); //возвращает вектора позиций и спрайтов
 		std::vector <sf::Sprite> getSprite();
-		sf::Vector2f getHeadPosition();
-		int getSize();
+		sf::Vector2f getHeadPosition(); //возвращает координату головы змейки
+		int getSize(); //возвращает кол-во €чеек
 
-		void update();
+		void update(); //обновл€ет состо€ние змейки
 
 	};
 }

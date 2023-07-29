@@ -1,13 +1,12 @@
 #pragma once
 
-#include "Snake.hpp"
-#include "Apple.hpp"
+#include "Snake.hpp" //подрубаем змею в движок
+#include "Apple.hpp" //подрубаем €блоко
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
-#include <iostream>
 
-namespace Engine_mod {
-	class Engine
+namespace Engine_mod { //движок входит в пространство имен Engine_mod 
+	class Engine 
 	{
 	public:
 		Engine();
@@ -15,9 +14,9 @@ namespace Engine_mod {
 		void start();
 
 	private:
-		sf::RenderWindow m_Window;
+		sf::RenderWindow m_Window; //храним окно
 
-		sf::Sprite m_BackgroundSprite;
+		sf::Sprite m_BackgroundSprite; 
 		sf::Texture m_BackgroundTexture;
 		
 		sf::Sprite win_sprite;
@@ -31,13 +30,14 @@ namespace Engine_mod {
 		
 		sf::Font font;
 		sf::Text* text;
+
 		void input();
 		void update();
 		void draw();
 		void restart();
 		void getPoint();
 
-		int is_Win = 0;
+		int is_Win = 0; //переменна€ хранит состо€ние игры
 
 	};
 }
