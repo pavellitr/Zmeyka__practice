@@ -41,14 +41,15 @@ void Actor::Apple::teleport() {
 	std::vector <sf::Vector2f>  chains = snake->getPos();
 	int i = 0, tpx = 40;
 	int flag = 0;
-	do
+	while (true)
 	{
 		for (i = 0; i < chains.size(); i++) {
-			if (proverka == chains[i]) { flag = 1; i=chains.size()-1; }
+			if (proverka == chains[i]) { flag = 1; break; }
 		}
 
 		if (flag == 0) {
 			break;
+
 		}
 
 		if (flag == 1) {
@@ -64,9 +65,8 @@ void Actor::Apple::teleport() {
 			if (tpx < 0) tpx = -tpx + 40;
 
 			flag = 0;
-		} 
-	} while (flag != 0);
-
+		}
+	}
 	a_Position = proverka;
 	a_Sprite.setPosition(a_Position);
 	
