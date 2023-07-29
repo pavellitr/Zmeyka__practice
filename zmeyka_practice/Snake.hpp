@@ -39,6 +39,7 @@ namespace Actor {
 		bool m_goLeft;
 		bool eated;
 		bool is_Changed;
+		bool is_Dead;
 
 	public:
 		Snake();
@@ -48,6 +49,7 @@ namespace Actor {
 		void is_Down();
 		void is_Right();
 		void is_Up();
+		bool getDead();
 
 		std::vector <sf::Vector2f> getPos();
 		std::vector <sf::Sprite> getSprite();

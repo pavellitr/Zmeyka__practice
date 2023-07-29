@@ -85,4 +85,8 @@ void Actor::Apple::update() {
 
 }
 
+void Actor::Apple::setPoints(int x) {
+	points = x;
+}
+
 

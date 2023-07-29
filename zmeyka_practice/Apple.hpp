@@ -27,7 +27,7 @@ namespace Actor {
 		int getPoints();
 
 		sf::Sprite getSprite();
-
+		void setPoints(int x);
 		
 		void update();
 

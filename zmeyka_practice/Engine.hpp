@@ -29,12 +29,13 @@ namespace Engine_mod {
 		Actor::Snake* snake;
 		Actor::Apple* apple;
 		
-
+		sf::Font font;
+		sf::Text* text;
 		void input();
 		void update();
 		void draw();
-
-
+		void restart();
+		void getPoint();
 
 		int is_Win = 0;
 
