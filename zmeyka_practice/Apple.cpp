@@ -2,37 +2,39 @@
 #include "stdlib.h"
 #include "time.h"
 
-Actor::Apple::Apple(Actor::Snake* snake) {
+Actor::Apple::Apple(Actor::Snake* snake) { // Конструктор яблока
 	this->snake = snake;
-
-	a_Texture = new sf::Texture;
+	//Добавление текстурок и спрайтов
+	a_Texture = new sf::Texture;  
 	sf::Texture texture;
 	texture.loadFromFile("Image\\Apple.png");
 	*a_Texture = texture;
 	a_Sprite.setTexture(*a_Texture);
-
+	
+	//Рандомное местоположение яблока 
 	float randX = 40 * (rand() % 24);
 	float randY = 40 * (rand() % 24);
 	a_Position = sf::Vector2f(randX, randY);
 	a_Sprite.setPosition(sf::Vector2f(randX,randY));
 	
+	//Стартовое кол-во очков
 	points = 0;
 
 }
-
+//Функция, возвращающая местоположение яблока в формате координат Vector2f
 sf::Vector2f Actor::Apple::getPosition() {
 	return a_Position;
 }
-
+//Функция, меняющая местоположение яблока в формате координат Vector2f
 void Actor::Apple::setPosition(sf::Vector2f pos) {
 	a_Position = pos;
 	a_Sprite.setPosition(a_Position);
 }
-
+//Функция, возвращающая спрайт
 sf::Sprite Actor::Apple::getSprite() {
 	return a_Sprite;
 }
-
+//Функция, отвечающая за появление нового яблока после поедания предыдущего
 void Actor::Apple::teleport() {
 	srand(time(NULL));
 	float randX = 40 * (rand() % 24);
@@ -69,11 +71,11 @@ void Actor::Apple::teleport() {
 	a_Sprite.setPosition(a_Position);
 	
 }
-
+//Функция возвращающая количество очков
 int Actor::Apple::getPoints() {
 	return points;
 }
-
+//Функция,отвечающая за всю логику поедания яблока
 void Actor::Apple::update() {
 	if (snake->getHeadPosition() == a_Position) {
 		 snake->grows_Snake();
@@ -84,7 +86,7 @@ void Actor::Apple::update() {
 	}
 
 }
-
+// Устанавливает определенное X очков
 void Actor::Apple::setPoints(int x) {
 	points = x;
 }
