@@ -13,6 +13,8 @@ Actor::Apple::Apple(Actor::Snake* snake) {
 
 	float randX = 40 * (rand() % 24);
 	float randY = 40 * (rand() % 24);
+	a_Position = sf::Vector2f(randX, randY);
+	a_Sprite.setPosition(sf::Vector2f(randX,randY));
 	
 	points = 0;
 
