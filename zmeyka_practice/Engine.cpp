@@ -48,7 +48,7 @@ void Engine_mod::Engine::start() {
 
 			draw();
 			if (snake->getSize() == 5) {
-				is_Win = -1;
+				is_Win = 1;
 			}
 		}
 		else if (is_Win == 1) {
