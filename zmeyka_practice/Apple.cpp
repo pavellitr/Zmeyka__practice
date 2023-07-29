@@ -11,8 +11,8 @@ Actor::Apple::Apple(Actor::Snake* snake) {
 	*a_Texture = texture;
 	a_Sprite.setTexture(*a_Texture);
 
-	a_Position = sf::Vector2f(280, 160);
-	a_Sprite.setPosition(sf::Vector2f(280,160));
+	float randX = 40 * (rand() % 24);
+	float randY = 40 * (rand() % 24);
 	
 	points = 0;
 
