@@ -113,6 +113,19 @@ void Actor::Snake::roll_massive(sf::Vector2f new_pos) {
 		Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
 		Snake_Pos[x] = Snake_Pos[x - 1];
 	}
+
+	if (new_pos.x > 1000) {
+		new_pos.x -= 1000;
+	}
+	if (new_pos.y > 1000) {
+		new_pos.y -= 1000;
+	}
+	if (new_pos.x < 0) {
+		new_pos.x += 1000;
+	}
+	if (new_pos.y < 0) {
+		new_pos.y += 1000;
+	}
 	Snake_Chains[0].setPosition(new_pos);
 	Snake_Pos[0] = new_pos;
 }
@@ -130,6 +143,20 @@ void Actor::Snake::grow(sf::Vector2f new_pos) {
 		Snake_Chains[x].setPosition(Snake_Chains[x - 1].getPosition());
 		Snake_Pos[x] = Snake_Pos[x - 1];
 	}
+
+	if (new_pos.x > 1000) {
+		new_pos.x -= 1000;
+	}
+	if (new_pos.y > 1000) {
+		new_pos.y -= 1000;
+	}
+	if (new_pos.x < 0) {
+		new_pos.x += 1000;
+	}
+	if (new_pos.y < 0) {
+		new_pos.y += 1000;
+	}
+
 	Snake_Chains[0].setPosition(new_pos);
 	Snake_Pos[0] = new_pos;
 }
