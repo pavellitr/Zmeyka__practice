@@ -19,6 +19,12 @@ namespace Engine_mod {
 
 		sf::Sprite m_BackgroundSprite;
 		sf::Texture m_BackgroundTexture;
+		
+		sf::Sprite win_sprite;
+		sf::Texture win_texture;
+
+		sf::Sprite lose_sprite;
+		sf::Texture lose_texture;
 
 		Actor::Snake* snake;
 		Actor::Apple* apple;

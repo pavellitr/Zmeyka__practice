@@ -13,6 +13,14 @@ Engine_mod::Engine::Engine() {
 	snake = new Actor::Snake();
 	apple = new Actor::Apple(snake);
 
+	this->win_texture.loadFromFile("Image\\blue.png");
+	this->win_sprite.setTexture(win_texture);
+
+	this->lose_texture.loadFromFile("Image\\red.jpg");
+	this->lose_sprite.setTexture(lose_texture);
+
+
+
 	this->m_BackgroundTexture.loadFromFile("Image\\myWorld.png");
 	this->m_BackgroundSprite.setTexture(m_BackgroundTexture);
 }
@@ -48,6 +56,12 @@ void Engine_mod::Engine::start() {
 		}
 		else if (is_Win == 1) {
 
+
+			m_Window.clear(sf::Color::White);
+			
+			m_Window.draw(win_sprite);
+			m_Window.display();
+
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
 				m_Window.close();
@@ -62,9 +76,14 @@ void Engine_mod::Engine::start() {
 
 		}
 		else if (is_Win == -1) {
+			m_Window.clear(sf::Color::White);
 
+			m_Window.draw(lose_sprite);
+			m_Window.display();
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
+			
+
 				m_Window.close();
 			}
 
