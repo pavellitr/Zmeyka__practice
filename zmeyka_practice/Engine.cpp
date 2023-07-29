@@ -90,3 +90,8 @@ void Engine_mod::Engine::input() {
 
 
 }
+
+void Engine_mod::Engine::addApple() {
+	Actor::Apple* apple = new Actor::Apple;
+
+}

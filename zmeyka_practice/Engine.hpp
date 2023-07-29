@@ -20,11 +20,13 @@ namespace Engine_mod {
 		sf::Texture m_BackgroundTexture;
 
 		Actor::Snake* snake;
-		Actor::Apple apple;
-		
+		std::vector <Actor::Apple*> Apples;
 
 		void input();
 		void update();
 		void draw();
+		void addApple();
+		
+
 	};
 }
