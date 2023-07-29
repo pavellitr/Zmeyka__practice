@@ -20,7 +20,7 @@ namespace Engine_mod {
 		sf::Texture m_BackgroundTexture;
 
 		Actor::Snake* snake;
-		Actor::Apple apple;
+		Actor::Apple* apple;
 		
 
 		void input();

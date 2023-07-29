@@ -11,6 +11,7 @@ Engine_mod::Engine::Engine() {
 
 
 	snake = new Actor::Snake();
+	apple = new Actor::Apple(snake);
 
 	this->m_BackgroundTexture.loadFromFile("Image\\myWorld.png");
 	this->m_BackgroundSprite.setTexture(m_BackgroundTexture);
@@ -45,14 +46,14 @@ void Engine_mod::Engine::update() {
 
 	snake->update();
 
-	apple.update();
+	apple->update();
 }
 void Engine_mod::Engine::draw() {
 	m_Window.clear(sf::Color::White);
 
 	m_Window.draw(m_BackgroundSprite);
 
-	sf::Sprite  Yabloko = apple.getSprite();
+	sf::Sprite  Yabloko = apple->getSprite();
 	m_Window.draw(Yabloko);
 
 	std::vector <sf::Sprite> Buffer = snake->getSprite();
