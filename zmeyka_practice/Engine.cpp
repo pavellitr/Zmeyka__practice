@@ -9,14 +9,18 @@ Engine_mod::Engine::Engine() {
 
 	m_Window.create(sf::VideoMode(1000, 1000), "Snake Game");
 
+	font.loadFromFile("font\\big-shot.ttf");
+	text = new sf::Text("", font, 20);
+
+
 
 	snake = new Actor::Snake();
 	apple = new Actor::Apple(snake);
 
-	this->win_texture.loadFromFile("Image\\blue.png");
+	this->win_texture.loadFromFile("Image\\You_Win.png");
 	this->win_sprite.setTexture(win_texture);
 
-	this->lose_texture.loadFromFile("Image\\red.jpg");
+	this->lose_texture.loadFromFile("Image\\You_Lose.png");
 	this->lose_sprite.setTexture(lose_texture);
 
 
@@ -41,13 +45,13 @@ void Engine_mod::Engine::start() {
 
 			sf::Int32 dU = clockUpdate.getElapsedTime().asMilliseconds();
 
-			if (dU >= 300) {
+			if (dU >= 100) {
 				update();
 				clockUpdate.restart();
 			}
 
 			draw();
-			if (snake->getSize() == 10) {
+			if (snake->getSize() == 50) {
 				is_Win = 1;
 			}
 			else if (snake->getDead()) {
@@ -74,6 +78,12 @@ void Engine_mod::Engine::start() {
 					m_Window.close();
 			}
 
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			{
+				restart();
+			}
+
 		}
 		else if (is_Win == -1) {
 			m_Window.clear(sf::Color::White);
@@ -94,6 +104,11 @@ void Engine_mod::Engine::start() {
 					m_Window.close();
 			}
 
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			{
+				restart();
+			}
+
 
 		}
 	}
@@ -104,28 +119,22 @@ void Engine_mod::Engine::update() {
 	snake->update();
 
 	apple->update();
+
+	getPoint();
 }
 void Engine_mod::Engine::draw() {
 	m_Window.clear(sf::Color::White);
 
 	m_Window.draw(m_BackgroundSprite);
 
-	
-	sf::Font font;
-	font.loadFromFile("font\\Arial.ttf");
-	sf::Text text("", font, 20); 
-	std::string s = std::to_string(apple->getPoints());
-	text.setString("Points:" + s );
-	text.setPosition(40, 40);
-	m_Window.draw(text);
-
-	sf::Sprite  Yabloko = apple->getSprite();
-	m_Window.draw(Yabloko);
+	m_Window.draw(apple->getSprite());
 
 	std::vector <sf::Sprite> Buffer = snake->getSprite();
 	for (int x = 0; x < Buffer.size(); x++) {
 		m_Window.draw(Buffer[x]);
 	}
+
+	m_Window.draw(*text);
 
 	m_Window.display();
 
@@ -167,4 +176,10 @@ void Engine_mod::Engine::restart() {
 	apple = new Actor::Apple(snake);
 
 	is_Win = 0;
+}
+
+void Engine_mod::Engine::getPoint() {
+	std::string s = std::to_string(apple->getPoints());
+	text->setString("Points: " + s);
+	text->setPosition(40, 40);
 }
