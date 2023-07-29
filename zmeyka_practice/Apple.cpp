@@ -46,6 +46,18 @@ void Actor::Apple::update() {
 	float randX = 40 * ( rand() % 24);
 	float randY = 40 * ( rand() % 24 );
 	sf::Vector2f proverka = sf::Vector2f(randX, randY);
+	int i=0;
+	while (proverka != snake_chains[i].getPosition() )
+	{
+		
+		randX = randX - 40;
+		proverka = sf::Vector2f(randX, randY);
+		i++;
+		if (i == sna) break;
+
+	}
+
+
 	a_Position = proverka;
     a_Sprite.setPosition(a_Position);
 	}
