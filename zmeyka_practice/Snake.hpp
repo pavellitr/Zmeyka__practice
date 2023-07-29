@@ -52,6 +52,7 @@ namespace Actor {
 		std::vector <sf::Vector2f> getPos();
 		std::vector <sf::Sprite> getSprite();
 		sf::Vector2f getHeadPosition();
+		int getSize();
 
 		void update();
 
