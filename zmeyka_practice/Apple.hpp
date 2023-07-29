@@ -14,7 +14,7 @@ namespace Actor {
 		sf::Sprite a_Sprite;
 		sf::Vector2f a_Position;
 	
-		float RandomNumber(int min, int max);
+		void teleport();
 
 	public:
 		
@@ -25,7 +25,9 @@ namespace Actor {
 
 		sf::Sprite getSprite();
 
+		
 		void update();
+
 
 		
 	};

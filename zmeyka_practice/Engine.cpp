@@ -33,7 +33,7 @@ void Engine_mod::Engine::start() {
 
 		sf::Int32 dU = clockUpdate.getElapsedTime().asMilliseconds();
 
-		if (dU >= 100) {
+		if (dU >= 500) {
 			update();
 			clockUpdate.restart();
 		}

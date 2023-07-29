@@ -1,6 +1,7 @@
 #include "Apple.hpp"
 #include "stdlib.h"
 #include "time.h"
+
 Actor::Apple::Apple(Actor::Snake* snake) {
 	this->snake = snake;
 
@@ -29,37 +30,52 @@ sf::Sprite Actor::Apple::getSprite() {
 	return a_Sprite;
 }
 
-float RandomNumber(int min, int max) {
+void Actor::Apple::teleport() {
 	srand(time(NULL));
-	float num = min + rand() % (max - min + 1);
-    return num;
+	float randX = 40 * (rand() % 24);
+	float randY = 40 * (rand() % 24);
+	sf::Vector2f proverka = sf::Vector2f(randX, randY);
+	std::vector <sf::Vector2f>  chains = snake->getPos();
+	int i = 0, tpx = 40;
+	int flag = 0;
+	while (true)
+	{
+		for (i = 0; i < chains.size(); i++) {
+			if (proverka == chains[i]) { flag = 1; break; }
+		}
+
+		if (flag == 0) {
+			break;
+
+		}
+
+		if (flag == 1) {
+			proverka.x = proverka.x - tpx;
+
+			if (proverka.x - tpx < 0 || proverka.x + tpx>960) {
+				proverka.y = 40 * (rand() % 24);
+				proverka.x = 40 * (rand() % 24);
+				tpx = 40;
+			}
+
+			if (tpx > 0) tpx = -tpx - 40;
+			if (tpx < 0) tpx = -tpx + 40;
+
+			flag = 0;
+		}
+	}
+	a_Position = proverka;
+	a_Sprite.setPosition(a_Position);
+	
 }
 
 
 void Actor::Apple::update() {
 	if (snake->getHeadPosition() == a_Position) {
-
-	snake->grows_Snake();
+		 snake->grows_Snake();
+		 teleport();
 		
-		
-	srand(time(NULL));
-	float randX = 40 * ( rand() % 24);
-	float randY = 40 * ( rand() % 24 );
-	sf::Vector2f proverka = sf::Vector2f(randX, randY);
-	int i=0;
-	while (proverka != snake_chains[i].getPosition() )
-	{
-		
-		randX = randX - 40;
-		proverka = sf::Vector2f(randX, randY);
-		i++;
-		if (i == sna) break;
-
-	}
-
-
-	a_Position = proverka;
-    a_Sprite.setPosition(a_Position);
+	
 	}
 
 }
