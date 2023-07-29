@@ -53,6 +53,15 @@ void Engine_mod::Engine::draw() {
 
 	m_Window.draw(m_BackgroundSprite);
 
+	
+	sf::Font font;
+	font.loadFromFile("font\\Arial.ttf");
+	sf::Text text("", font, 20); 
+	std::string s = std::to_string(apple->getPoints());
+	text.setString("Points:" + s );
+	text.setPosition(40, 40);
+	m_Window.draw(text);
+
 	sf::Sprite  Yabloko = apple->getSprite();
 	m_Window.draw(Yabloko);
 

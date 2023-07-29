@@ -13,7 +13,8 @@ Actor::Apple::Apple(Actor::Snake* snake) {
 
 	a_Position = sf::Vector2f(280, 160);
 	a_Sprite.setPosition(sf::Vector2f(280,160));
- 
+	
+	points = 0;
 
 }
 
@@ -69,11 +70,15 @@ void Actor::Apple::teleport() {
 	
 }
 
+int Actor::Apple::getPoints() {
+	return points;
+}
 
 void Actor::Apple::update() {
 	if (snake->getHeadPosition() == a_Position) {
 		 snake->grows_Snake();
 		 teleport();
+		 points = points+10;
 		
 	
 	}

@@ -13,6 +13,7 @@ namespace Actor {
 		sf::Texture* a_Texture;
 		sf::Sprite a_Sprite;
 		sf::Vector2f a_Position;
+		int points;
 	
 		void teleport();
 
@@ -22,6 +23,8 @@ namespace Actor {
 			
 		sf::Vector2f getPosition();
 		void setPosition(sf::Vector2f position);
+
+		int getPoints();
 
 		sf::Sprite getSprite();
 
