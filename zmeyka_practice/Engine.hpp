@@ -27,7 +27,7 @@ namespace Engine_mod {
 		void input();
 		void update();
 		void draw();
-
+		void restart();
 
 
 		int is_Win = 0;

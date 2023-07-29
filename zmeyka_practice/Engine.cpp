@@ -40,7 +40,7 @@ void Engine_mod::Engine::start() {
 
 			draw();
 			if (snake->getSize() == 5) {
-				is_Win = 1;
+				is_Win = -1;
 			}
 		}
 		else if (is_Win == 1) {
@@ -71,6 +71,7 @@ void Engine_mod::Engine::start() {
 				if (event.type == sf::Event::Closed)
 					m_Window.close();
 			}
+
 
 		}
 	}
@@ -133,4 +134,15 @@ void Engine_mod::Engine::input() {
 
 
 
+}
+
+void Engine_mod::Engine::restart() {
+	apple->setPoints(0);
+	delete snake;
+	delete apple;
+
+	snake = new Actor::Snake();
+	apple = new Actor::Apple(snake);
+
+	is_Win = 0;
 }

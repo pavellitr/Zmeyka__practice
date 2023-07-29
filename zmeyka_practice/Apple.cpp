@@ -78,11 +78,15 @@ void Actor::Apple::update() {
 	if (snake->getHeadPosition() == a_Position) {
 		 snake->grows_Snake();
 		 teleport();
-		 points = points+10;
+		 points = points;
 		
 	
 	}
 
+}
+
+void Actor::Apple::setPoints(int x) {
+	points = x;
 }
 
 
