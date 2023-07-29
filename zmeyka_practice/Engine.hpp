@@ -4,6 +4,7 @@
 #include "Apple.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
+#include <iostream>
 
 namespace Engine_mod {
 	class Engine
@@ -26,5 +27,10 @@ namespace Engine_mod {
 		void input();
 		void update();
 		void draw();
+
+
+
+		int is_Win = 0;
+
 	};
 }

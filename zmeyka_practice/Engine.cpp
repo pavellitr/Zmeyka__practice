@@ -21,24 +21,58 @@ void Engine_mod::Engine::start() {
 
 	sf::Clock clockUpdate;
 	while (m_Window.isOpen()) {
+		if (is_Win == 0) {
+			sf::Event event;
+			while (m_Window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					m_Window.close();
+			}
 
-		sf::Event event;
-		while (m_Window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
+			input();
+
+			sf::Int32 dU = clockUpdate.getElapsedTime().asMilliseconds();
+
+			if (dU >= 100) {
+				update();
+				clockUpdate.restart();
+			}
+
+			draw();
+			if (snake->getSize() == 5) {
+				is_Win = 1;
+			}
+		}
+		else if (is_Win == 1) {
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			{
 				m_Window.close();
+			}
+
+			sf::Event event;
+			while (m_Window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					m_Window.close();
+			}
+
 		}
+		else if (is_Win == -1) {
 
-		input();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			{
+				m_Window.close();
+			}
 
-		sf::Int32 dU = clockUpdate.getElapsedTime().asMilliseconds();
+			sf::Event event;
+			while (m_Window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					m_Window.close();
+			}
 
-		if (dU >= 500) {
-			update();
-			clockUpdate.restart();
 		}
-
-		draw();
 	}
 }
 

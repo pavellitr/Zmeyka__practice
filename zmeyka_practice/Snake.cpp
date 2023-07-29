@@ -176,3 +176,6 @@ void Actor::Snake::grows_Snake() {
 	eated = true;
 }
 
+int Actor::Snake::getSize() {
+	return Snake_Chains.size();
+}
